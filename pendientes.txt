@@ -1,0 +1,8 @@
+
+Agregar flujos de CRUD empresa y ajusta CRUD de agenda dentro de empresa
+Agregar flujo CRUD para usuarios en empresas con rol
+Seleccionar medico para la agenda que se crea
+
+Agregar flujo de cambio de plan
+
+La primer empresa se crea en automatico con el plan, se puede editar. Las siguientes empresas son opcionales. No podes crear una nueva empresa si no te quedan cupos de creacion de agendas.
