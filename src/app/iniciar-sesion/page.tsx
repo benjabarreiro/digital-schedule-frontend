@@ -1,6 +1,9 @@
 "use client";
+import AuthContext from "@/contexts/Auth";
+import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Col,
@@ -10,17 +13,36 @@ import {
   Row,
 } from "react-bootstrap";
 
+const initialState = { email: "", password: "" };
+
 export default function Login() {
   const [validated, setValidated] = useState(false);
+  const [formValues, setFormValues] = useState(initialState);
 
-  const handleSubmit = (event: any) => {
+  const router = useRouter();
+
+  const { setIsAuthenticated } = useContext(AuthContext);
+
+  const handleChange = (e: any) => {
+    setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (event: any) => {
     const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
+    try {
+      await axios.post("http://localhost:3001/users/authenticate", formValues);
+      setIsAuthenticated(true);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setFormValues(initialState);
+    }
   };
   return (
     <Container>
@@ -34,14 +56,24 @@ export default function Login() {
             <Form.Control
               required
               type="email"
+              name="email"
               placeholder="name@example.com"
+              value={formValues.email}
+              onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
               Mail Invalido
             </Form.Control.Feedback>
           </FloatingLabel>
           <FloatingLabel controlId="floatingPassword" label="Password">
-            <Form.Control required type="password" placeholder="Password" />
+            <Form.Control
+              required
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formValues.password}
+              onChange={handleChange}
+            />
             <Form.Control.Feedback type="invalid">
               Contraseña invalida
             </Form.Control.Feedback>
