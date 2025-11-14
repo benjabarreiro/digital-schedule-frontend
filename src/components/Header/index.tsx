@@ -5,10 +5,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { user } from "../../lib/mock/data";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "@/contexts/Auth";
 
 function Header() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   return (
     <header className="mb-5">
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
