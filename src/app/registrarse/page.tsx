@@ -87,6 +87,7 @@ export default function Register() {
               type="email"
               name="email"
               placeholder="name@example.com"
+              value={formValues.email}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -103,6 +104,7 @@ export default function Register() {
               type="password"
               name="password"
               placeholder="Password"
+              value={formValues.password}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -121,6 +123,7 @@ export default function Register() {
               type="text"
               name="firstName"
               placeholder="Nombre"
+              value={formValues.firstName}
               onChange={handleChange}
             />
           </FloatingLabel>
@@ -134,12 +137,14 @@ export default function Register() {
               type="text"
               name="lastName"
               placeholder="Apellido"
+              value={formValues.lastName}
               onChange={handleChange}
             />
           </FloatingLabel>
           <Form.Select
             aria-label="Default select example"
             onChange={(e) => handleHealthInusrances(e.target.value)}
+            value={formValues.healthInsurances[0]}
           >
             <option>Seleccioná tu obra social</option>
             <option value="1">Osde</option>
