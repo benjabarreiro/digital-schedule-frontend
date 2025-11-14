@@ -73,7 +73,6 @@ export default function Register() {
     }
   };
 
-  console.log(formValues);
   return (
     <Container>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
